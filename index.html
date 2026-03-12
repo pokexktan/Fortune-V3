@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>摇签</title>
+
+<style>
+
+body{
+background:#7b0000;
+color:white;
+font-family:sans-serif;
+text-align:center;
+margin:0;
+padding:20px;
+}
+
+h1{
+margin-top:20px;
+}
+
+button{
+padding:15px 30px;
+font-size:18px;
+margin:10px;
+background:gold;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.card{
+background:white;
+color:black;
+width:320px;
+margin:20px auto;
+padding:20px;
+border-radius:12px;
+}
+
+.poem{
+white-space:pre-line;
+margin-top:10px;
+}
+
+#cup{
+font-size:60px;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🙏 摇签 🙏</h1>
+
+<p>请先掷杯</p>
+
+<button id="cupBtn">掷杯</button>
+
+<button id="drawBtn" style="display:none">摇签</button>
+
+<button id="resetBtn" style="display:none">重新开始</button>
+
+<div id="cup"></div>
+
+<div id="result" class="card">
+祝你好运🍀
+</div>
+
+<script>
+
+let cup=document.getElementById("cup")
+let result=document.getElementById("result")
+let cupBtn=document.getElementById("cupBtn")
+let drawBtn=document.getElementById("drawBtn")
+let resetBtn=document.getElementById("resetBtn")
+
+cupBtn.onclick=ask
+drawBtn.onclick=draw
+resetBtn.onclick=reset
+
+function ask(){
+
+let r=Math.random()
+
+if(r<0.2){
+
+cup.innerHTML="😄 笑杯"
+result.innerHTML="未明示，请换个问题或继续掷杯"
+
+}
+else if(r<0.4){
+
+cup.innerHTML="😐 阴杯"
+result.innerHTML="不同意，请换个问题再掷杯"
+
+}
+else{
+
+cup.innerHTML="🙏 圣杯"
+result.innerHTML="允许，请摇签"
+
+cupBtn.style.display="none"
+drawBtn.style.display="inline-block"
+
+}
+
+}
+
+function draw(){
+
+let i=Math.floor(Math.random()*fortunes.length)
+
+let f=fortunes[i]
+
+result.innerHTML=
+"<h2>"+f.title+"</h2>"+
+"<div class='poem'>"+f.poem+"</div>"+
+"<p><b>解签：</b>"+f.interpretation+"</p>"
+
+drawBtn.style.display="none"
+resetBtn.style.display="inline-block"
+
+}
+
+function reset(){
+
+cup.innerHTML=""
+result.innerHTML="请先掷杯"
+
+cupBtn.style.display="inline-block"
+drawBtn.style.display="none"
+resetBtn.style.display="none"
+
+}
+
+const fortunes=[
+
+{title:"第1签",poem:"上上签\n春风得意",interpretation:"大吉之象，诸事顺利"},
+{title:"第2签",poem:"上签\n静待时机",interpretation:"耐心等待好运将来"},
+{title:"第3签",poem:"中签\n劳而有获",interpretation:"努力之后会有收获"},
+{title:"第4签",poem:"中签\n云开见日",interpretation:"困境即将结束"},
+{title:"第5签",poem:"中签\n贵人相助",interpretation:"将遇贵人帮助"},
+{title:"第6签",poem:"中签\n守旧为佳",interpretation:"保持现状比较好"},
+{title:"第7签",poem:"中签\n渐入佳境",interpretation:"事情慢慢好转"},
+{title:"第8签",poem:"上签\n松柏长青",interpretation:"事业稳定发展"},
+{title:"第9签",poem:"中签\n多劳多得",interpretation:"付出才有回报"},
+{title:"第10签",poem:"上签\n藏玉于石",interpretation:"机会隐藏在困难中"},
+
+{title:"第11签",poem:"中签\n行稳致远",interpretation:"稳重行事可成功"},
+{title:"第12签",poem:"中签\n否极泰来",interpretation:"坏运即将结束"},
+{title:"第13签",poem:"中签\n春雷惊蛰",interpretation:"新的机会到来"},
+{title:"第14签",poem:"中签\n遇贵得助",interpretation:"有贵人帮助"},
+{title:"第15签",poem:"中签\n时机未到",interpretation:"需要耐心等待"},
+{title:"第16签",poem:"上签\n吉星高照",interpretation:"好运降临"},
+{title:"第17签",poem:"中签\n慎言慎行",interpretation:"谨慎处理事情"},
+{title:"第18签",poem:"中签\n日月交替",interpretation:"事情正在变化"},
+{title:"第19签",poem:"中签\n险中求稳",interpretation:"需要谨慎行事"},
+{title:"第20签",poem:"上签\n雨后天晴",interpretation:"苦尽甘来"},
+
+{title:"第21签",poem:"上签\n阴阳和合",interpretation:"合作顺利"},
+{title:"第22签",poem:"中签\n四野春风",interpretation:"机缘未到"},
+{title:"第23签",poem:"中签\n登高望远",interpretation:"努力会有机会"},
+{title:"第24签",poem:"中签\n家道渐兴",interpretation:"家庭运势转好"},
+{title:"第25签",poem:"上签\n重重好运",interpretation:"运势逐渐变好"},
+{title:"第26签",poem:"中签\n虚实难辨",interpretation:"需多观察"},
+{title:"第27签",poem:"中签\n谋定而动",interpretation:"计划后再行动"},
+{title:"第28签",poem:"中签\n月上东山",interpretation:"机会渐渐出现"},
+{title:"第29签",poem:"中签\n宝剑出匣",interpretation:"才能将被发现"},
+{title:"第30签",poem:"上签\n坚定信念",interpretation:"坚持必有结果"},
+
+{title:"第31签",poem:"中签\n静守为安",interpretation:"不宜冒进"},
+{title:"第32签",poem:"中签\n耐心等待",interpretation:"时机尚未成熟"},
+{title:"第33签",poem:"上签\n枯木逢春",interpretation:"运势复苏"},
+{title:"第34签",poem:"中签\n春风入户",interpretation:"好运渐来"},
+{title:"第35签",poem:"中签\n重整旗鼓",interpretation:"重新开始"},
+{title:"第36签",poem:"中签\n贵人扶助",interpretation:"有人帮助"},
+{title:"第37签",poem:"中签\n远方消息",interpretation:"等待消息"},
+{title:"第38签",poem:"中签\n清心守志",interpretation:"保持内心平静"},
+{title:"第39签",poem:"中签\n阻碍暂存",interpretation:"暂时困难"},
+{title:"第40签",poem:"上签\n时来运转",interpretation:"好运来临"},
+
+{title:"第41签",poem:"中签\n喜事临门",interpretation:"有好消息"},
+{title:"第42签",poem:"中签\n云散天开",interpretation:"困难消失"},
+{title:"第43签",poem:"中签\n渡江无舟",interpretation:"需要帮助"},
+{title:"第44签",poem:"中签\n守得云开",interpretation:"坚持成功"},
+{title:"第45签",poem:"上签\n富贵之象",interpretation:"大吉"},
+{title:"第46签",poem:"中签\n忠心报国",interpretation:"努力会成功"},
+{title:"第47签",poem:"中签\n柳暗花明",interpretation:"出现转机"},
+{title:"第48签",poem:"中签\n桃李新春",interpretation:"新机会"},
+{title:"第49签",poem:"中签\n花开有时",interpretation:"顺其自然"},
+{title:"第50签",poem:"上签\n金榜题名",interpretation:"成功之象"},
+
+{title:"第51签",poem:"中签\n顺天而行",interpretation:"顺势而为"},
+{title:"第52签",poem:"中签\n运势渐旺",interpretation:"好运将来"},
+{title:"第53签",poem:"中签\n守旧为佳",interpretation:"稳定最好"},
+{title:"第54签",poem:"中签\n明月当空",interpretation:"前途明朗"},
+{title:"第55签",poem:"上签\n富贵天成",interpretation:"福禄双全"},
+{title:"第56签",poem:"中签\n等待时机",interpretation:"不可急躁"},
+{title:"第57签",poem:"中签\n谋事在人",interpretation:"努力即可"},
+{title:"第58签",poem:"中签\n春风再来",interpretation:"重新开始"},
+{title:"第59签",poem:"中签\n青山常在",interpretation:"稳定发展"},
+{title:"第60签",poem:"上签\n好运临门",interpretation:"吉祥之兆"},
+
+{title:"第61签",poem:"中签\n安分守己",interpretation:"顺其自然"},
+{title:"第62签",poem:"中签\n运势低迷",interpretation:"谨慎行事"},
+{title:"第63签",poem:"中签\n静待花开",interpretation:"时机将至"},
+{title:"第64签",poem:"中签\n坚持希望",interpretation:"困难会过去"},
+{title:"第65签",poem:"上签\n成功可期",interpretation:"事业成功"},
+{title:"第66签",poem:"中签\n天道酬勤",interpretation:"努力成功"},
+{title:"第67签",poem:"中签\n贵人来助",interpretation:"机遇到来"},
+{title:"第68签",poem:"中签\n福祸相依",interpretation:"谨慎选择"},
+{title:"第69签",poem:"中签\n稳中求进",interpretation:"慢慢发展"},
+{title:"第70签",poem:"上签\n万事顺利",interpretation:"大吉大利"},
+
+{title:"第71签",poem:"中签\n守得云开",interpretation:"成功在前"},
+{title:"第72签",poem:"中签\n时机未到",interpretation:"再等等"},
+{title:"第73签",poem:"中签\n努力必成",interpretation:"坚持成功"},
+{title:"第74签",poem:"中签\n转机将至",interpretation:"事情好转"},
+{title:"第75签",poem:"上签\n金玉满堂",interpretation:"财富之象"},
+{title:"第76签",poem:"中签\n贵人相扶",interpretation:"好运来临"},
+{title:"第77签",poem:"中签\n耐心等待",interpretation:"机会接近"},
+{title:"第78签",poem:"中签\n平安顺利",interpretation:"顺利发展"},
+{title:"第79签",poem:"中签\n守成有福",interpretation:"稳定最好"},
+{title:"第80签",poem:"上签\n事业成功",interpretation:"大吉大利"},
+
+{title:"第81签",poem:"中签\n守静为安",interpretation:"不宜冒进"},
+{title:"第82签",poem:"中签\n贵人帮助",interpretation:"好运渐来"},
+{title:"第83签",poem:"中签\n心诚则灵",interpretation:"努力有成"},
+{title:"第84签",poem:"中签\n耐心守候",interpretation:"时机将到"},
+{title:"第85签",poem:"上签\n福禄双全",interpretation:"吉祥如意"},
+{title:"第86签",poem:"上签\n春来花开",interpretation:"运势大开"},
+{title:"第87签",poem:"中签\n顺势而行",interpretation:"顺势成功"},
+{title:"第88签",poem:"中签\n云散天明",interpretation:"困难解除"},
+{title:"第89签",poem:"中签\n前途渐明",interpretation:"运势好转"},
+{title:"第90签",poem:"上签\n福星高照",interpretation:"好运来临"},
+
+{title:"第91签",poem:"中签\n努力成功",interpretation:"坚持成功"},
+{title:"第92签",poem:"中签\n守得花开",interpretation:"好运渐近"},
+{title:"第93签",poem:"中签\n心想事成",interpretation:"愿望实现"},
+{title:"第94签",poem:"中签\n等待机会",interpretation:"机会将来"},
+{title:"第95签",poem:"上签\n吉星照命",interpretation:"大吉"},
+{title:"第96签",poem:"中签\n守正不移",interpretation:"稳定发展"},
+{title:"第97签",poem:"中签\n好运渐来",interpretation:"前途光明"},
+{title:"第98签",poem:"中签\n贵人相助",interpretation:"事业顺利"},
+{title:"第99签",poem:"中签\n先苦后甜",interpretation:"终会成功"},
+{title:"第100签",poem:"上上签\n功成名就",interpretation:"大吉大利"}
+
+]
+
+</script>
+
+
+<div class="disclaimer">
+免责声明：本网页为传统文化娱乐体验，不构成任何现实建议或依据，使用者需自行判断，本网站不承担任何责任。
+</div>
+
+</body>
+</html>
